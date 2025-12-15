@@ -11,49 +11,69 @@
     }
   </script>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <h1>Ứng dụng Quản lý Thời Gian</h1>
-    <button onclick="logout()" class="logout-btn">Đăng xuất</button>
-  </header>
+<header class="header">
+  <h1>⏰ Quản lý Thời Gian</h1>
+  <p id="currentTime" class="time"></p>
+  <button onclick="logout()" class="logout-btn">Đăng xuất</button>
+</header>
 
-  <!-- DASHBOARD -->
-  <main class="container">
+<main class="container">
 
-    <!-- LẬP KẾ HOẠCH -->
-    <section class="card">
-      <h2>📋 Lập kế hoạch & Tổ chức</h2>
-      <input type="text" id="task" placeholder="Nhập công việc cần làm">
-      <button onclick="addTask()">Thêm công việc</button>
-      <ul id="taskList"></ul>
-    </section>
+  <!-- TASK -->
+  <section class="card">
+    <h2>📋 Quản lý công việc</h2>
 
-    <!-- THEO DÕI -->
-    <section class="card">
-      <h2>⏱️ Theo dõi & Tập trung</h2>
-      <p>Pomodoro (25 phút tập trung)</p>
-      <button onclick="startPomodoro()">Bắt đầu</button>
-      <p id="timer">25:00</p>
-    </section>
+    <input type="text" id="task" placeholder="Nhập công việc">
+    <select id="priority">
+      <option value="Cao">🔥 Cao</option>
+      <option value="Trung bình">⚡ Trung bình</option>
+      <option value="Thấp">🌱 Thấp</option>
+    </select>
+    <input type="datetime-local" id="endTime">
+    <button onclick="addTask()">Thêm</button>
 
-    <!-- MỤC TIÊU -->
-    <section class="card">
-      <h2>🎯 Mục tiêu dài hạn</h2>
-      <input type="text" id="goal" placeholder="Nhập mục tiêu">
-      <button onclick="addGoal()">Thêm mục tiêu</button>
-      <ul id="goalList"></ul>
-    </section>
+    <ul id="taskList"></ul>
 
-  </main>
+    <div class="progress-container">
+      <div id="progressBar"></div>
+    </div>
+    <p id="progressText">0% hoàn thành</p>
+  </section>
 
-  <!-- JS -->
-  <script src="js/auth.js"></script>
-  <script src="js/script.js"></script>
+  <!--THÊM QUẢN LÝ MỤC TIÊU DÀI HẠN-->
+  <section class="card">
+  <h2>🎯 Quản lý mục tiêu dài hạn</h2>
+
+  <input type="text" id="goalName" placeholder="Tên mục tiêu (VD: Học xong Python)">
+  <textarea id="goalDesc" placeholder="Mô tả mục tiêu (có thể để trống)"></textarea>
+
+  <label>Bắt đầu:</label>
+  <input type="date" id="goalStart">
+
+  <label>Kết thúc:</label>
+  <input type="date" id="goalEnd">
+
+  <button onclick="addGoal()">Thêm mục tiêu</button>
+
+  <ul id="goalList"></ul>
+</section>
+
+
+  <!-- POMODORO -->
+  <section class="card">
+    <h2>⏱ Pomodoro</h2>
+    <p id="timer">25:00</p>
+    <button onclick="startPomodoro()">Bắt đầu</button>
+  </section>
+
+</main>
+
+<script src="js/auth.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>

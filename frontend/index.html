@@ -2,17 +2,58 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Quản lý thời gian</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Ứng dụng Quản lý Thời Gian</title>
+
+  <!-- Kiểm tra đăng nhập -->
+  <script>
+    if (!localStorage.getItem("isLogin")) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Ứng dụng Quản lý Thời Gian</h1>
 
-  <input type="text" id="task" placeholder="Nhập công việc">
-  <button onclick="addTask()">Thêm</button>
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Ứng dụng Quản lý Thời Gian</h1>
+    <button onclick="logout()" class="logout-btn">Đăng xuất</button>
+  </header>
 
-  <ul id="taskList"></ul>
+  <!-- DASHBOARD -->
+  <main class="container">
 
-  <script src="script.js"></script>
+    <!-- LẬP KẾ HOẠCH -->
+    <section class="card">
+      <h2>📋 Lập kế hoạch & Tổ chức</h2>
+      <input type="text" id="task" placeholder="Nhập công việc cần làm">
+      <button onclick="addTask()">Thêm công việc</button>
+      <ul id="taskList"></ul>
+    </section>
+
+    <!-- THEO DÕI -->
+    <section class="card">
+      <h2>⏱️ Theo dõi & Tập trung</h2>
+      <p>Pomodoro (25 phút tập trung)</p>
+      <button onclick="startPomodoro()">Bắt đầu</button>
+      <p id="timer">25:00</p>
+    </section>
+
+    <!-- MỤC TIÊU -->
+    <section class="card">
+      <h2>🎯 Mục tiêu dài hạn</h2>
+      <input type="text" id="goal" placeholder="Nhập mục tiêu">
+      <button onclick="addGoal()">Thêm mục tiêu</button>
+      <ul id="goalList"></ul>
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="js/auth.js"></script>
+  <script src="js/script.js"></script>
+
 </body>
 </html>

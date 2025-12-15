@@ -1,0 +1,112 @@
+/* RESET CƠ BẢN */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY */
+body {
+  background: #f4f6f8;
+  color: #333;
+}
+
+/* HEADER */
+.header {
+  background: #2563eb;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 22px;
+}
+
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  padding: 8px 14px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* CONTAINER */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+/* INPUT + BUTTON */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* LIST */
+ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+li {
+  background: #f1f5f9;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+
+/* POMODORO */
+#timer {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #16a34a;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 18px;
+  }
+}

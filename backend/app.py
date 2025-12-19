@@ -1,18 +1,17 @@
-from flask import Flask, jsonify, request
+from flask import Flask
+from database.models import db
+from api.routes import api
 
 app = Flask(__name__)
 
-tasks = []
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///time.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-@app.route("/tasks", methods=["GET"])
-def get_tasks():
-    return jsonify(tasks)
+db.init_app(app)
+app.register_blueprint(api, url_prefix="/api")
 
-@app.route("/tasks", methods=["POST"])
-def add_task():
-    data = request.json
-    tasks.append(data)
-    return {"message": "Task added"}, 201
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)

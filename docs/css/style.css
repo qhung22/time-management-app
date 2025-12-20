@@ -1,229 +1,77 @@
-/* ====================================
-   1. CSS Cơ Bản và Thiết Lập Chung
-   ==================================== */
+/* Giao diện chung */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font hiện đại hơn */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f4f6f8;
     margin: 0;
-    color: #333; /* Màu chữ tối hơn, dễ đọc hơn */
+    color: #333;
 }
 
-/* ====================================
-   2. Header và Thanh điều hướng
-   ==================================== */
-
-/* Giữ nguyên lớp .header */
 .header {
-    background: #4facfe;
-    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); 
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     color: white;
-    padding: 20px 15px; 
+    padding: 20px;
     text-align: center;
-    position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Cập nhật lớp .logout-btn */
-.logout-btn {
-    position: absolute; /* Đặt vị trí tuyệt đối */
-    
-    /* Vị trí mới: Góc trên bên phải */
-    right: 20px; /* Cách lề phải 20px */
-    top: 20px;   /* Cách lề trên 20px (Nếu muốn cao hơn/thấp hơn, bạn có thể điều chỉnh giá trị này) */
-    
-    /* Thu nhỏ kích thước và font */
-    padding: 6px 12px; /* Kích thước nhỏ hơn */
-    font-size: 14px; /* Cỡ chữ nhỏ hơn */
-    font-weight: 500; /* Độ đậm vừa phải */
-    
-    border: none;
-    background: #ff4d4d; /* Màu đỏ */
-    color: white;
-    cursor: pointer;
-    border-radius: 6px; 
-    transition: background 0.3s;
-    
-    /* Nếu bạn đang dùng nó cho thanh màu đỏ, thêm: */
-    width: auto; /* Đảm bảo nó không chiếm toàn bộ chiều rộng */
-    display: inline-block; /* Quan trọng để nó thu nhỏ theo nội dung */
-}
-
-.logout-btn:hover {
-    background: #e63946;
-}
-
-.time {
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-/* ====================================
-   3. Bố Cục Chính (Container) - Cải tiến Grid
-   ==================================== */
+/* Chia 2 cột: Trái 2 phần, Phải 1 phần */
 .container {
-    max-width: 1200px; /* Giới hạn chiều rộng */
-    margin: 30px auto; /* Căn giữa và tăng khoảng cách trên/dưới */
-    padding: 0 20px;
-    
-    /* Thiết lập Grid ban đầu: 3 cột ngang */
+    max-width: 1200px;
+    margin: 30px auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px; /* Khoảng cách lớn hơn giữa các khối */
-}
-
-/* Dùng Grid Layout để gom hai khối Quản lý vào cột 2/3 không gian và Pomodoro vào 1/3 */
-/* Quản lý công việc và Quản lý mục tiêu (Thẻ <section> đầu tiên và thứ hai) 
-   sẽ chiếm 2 cột (2/3 chiều rộng) */
-.container > section:nth-child(1),
-.container > section:nth-child(2) {
-    grid-column: span 2; /* Chiếm 2 cột trong tổng 3 cột ban đầu */
-}
-
-/* Pomodoro (Thẻ <section> thứ ba) sẽ chiếm 1 cột (1/3 chiều rộng) */
-.container > section:nth-child(3) {
-    grid-column: span 1;
-}
-
-/* Điều chỉnh lại bố cục của hai khối Quản lý để chúng xếp dọc: */
-.container {
-    /* Thiết lập lại grid để 2 khối quản lý và 1 khối pomodoro nằm cạnh nhau */
     grid-template-columns: 2fr 1fr; 
+    gap: 30px;
+    padding: 0 20px;
 }
 
-/* Đặt hai khối Quản lý vào cùng một khu vực (dùng flexbox để xếp chúng dọc) */
-.container > section:nth-child(1) {
-    grid-column: 1 / 2; /* Đảm bảo nó ở cột 1 */
-    grid-row: 1 / 2; /* Dòng 1 */
-}
-
-.container > section:nth-child(2) {
-    grid-column: 1 / 2; /* Đảm bảo nó ở cột 1 */
-    grid-row: 2 / 3; /* Dòng 2, ngay dưới khối Quản lý công việc */
-}
-
-.container > section:nth-child(3) {
-    grid-column: 2 / 3; /* Pomodoro ở cột 2 (cột 1fr) */
-    grid-row: 1 / 3; /* Kéo dài qua cả 2 dòng của cột 1 để canh lề tốt hơn */
-}
-
-
-/* ====================================
-   4. Thẻ Card Chung và Thành phần
-   ==================================== */
 .card {
     background: white;
-    padding: 25px; /* Tăng padding nội bộ */
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Bóng đổ tinh tế hơn */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
 }
 
-.card h2 {
-    margin-top: 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #4facfe;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
+/* Pomodoro */
+.time-display {
+    font-size: 60px;
+    font-weight: bold;
+    color: #e63946;
+    text-align: center;
+    margin: 20px 0;
 }
 
-
-/* Thiết lập các trường nhập liệu và nút */
-input[type="text"], 
-input[type="datetime-local"], 
-input[type="date"], 
-select,
-textarea { /* Thêm textarea */
-    margin: 8px 0;
-    padding: 12px;
+/* Input và Button */
+input, select, textarea {
     width: 100%;
-    box-sizing: border-box; 
+    padding: 12px;
+    margin: 8px 0;
     border: 1px solid #ddd;
     border-radius: 6px;
-    transition: border-color 0.3s;
-    font-family: inherit;
-    resize: vertical; /* Cho phép người dùng resize textarea */
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #4facfe;
-    outline: none;
-}
-
-label { /* Định dạng cho label trong Quản lý mục tiêu */
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #555;
+    box-sizing: border-box;
 }
 
 button {
-    margin-top: 15px;
-    padding: 12px;
     width: 100%;
+    padding: 12px;
     background: #4facfe;
-    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 6px;
+    cursor: pointer;
     font-weight: bold;
-    transition: opacity 0.3s, transform 0.2s;
+    transition: 0.3s;
 }
 
-button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* ====================================
-   5. Chỉnh sửa chi tiết cho từng khối
-   ==================================== */
-
-/* Pomodoro */
-.container > section:nth-child(3) {
-    /* Đã được điều chỉnh ở phần 3 để chiếm 1/3 và kéo dài 2 dòng */
-    height: fit-content; 
-    text-align: center;
-    position: sticky; /* Giữ Pomodoro cố định khi cuộn */
-    top: 30px;
-}
-
-#timer {
-    font-size: 60px;
-    font-weight: bold;
-    margin: 20px 0;
-    color: #e63946;
-}
-
-.container > section:nth-child(3) button {
-    margin-top: 20px;
-    background: #43e97b;
-    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
-}
-
-.container > section:nth-child(3) button:hover {
-    opacity: 0.9;
-}
-
+button:hover { opacity: 0.9; }
 
 /* Tiến độ */
-#progressText {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #555;
-    font-weight: 600;
-}
-
 .progress-container {
     width: 100%;
     height: 12px;
     background: #e0e0e0;
     border-radius: 6px;
-    margin-top: 5px;
+    margin: 10px 0;
 }
 
 #progressBar {
@@ -231,24 +79,20 @@ button:hover {
     width: 0%;
     background: linear-gradient(to right, #43e97b, #38f9d7);
     border-radius: 6px;
-    transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease;
 }
 
-/* Danh sách Công việc / Mục tiêu */
-ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
+ul { list-style: none; padding: 0; }
 li {
-    margin: 8px 0;
-    padding: 12px;
     background: #f9f9f9;
-    border-radius: 6px;
-    border-left: 5px solid #4facfe; /* Nhấn mạnh bằng đường viền bên trái */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 5px solid #4facfe;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
 }

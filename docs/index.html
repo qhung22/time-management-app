@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Ứng dụng Quản lý Thời Gian</title>
-
-  <!-- Kiểm tra đăng nhập -->
   <script>
     if (!localStorage.getItem("isLogin")) {
       window.location.href = "login.html";
     }
   </script>
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,54 +19,56 @@
 </header>
 
 <main class="container">
+  <div class="main-content">
+    
+    <section class="card">
+      <h2>📋 Quản lý công việc</h2>
+      <input type="text" id="task" placeholder="Nhập công việc">
+      <select id="priority">
+        <option value="Cao">🔥 Cao</option>
+        <option value="Trung bình">⚡ Trung bình</option>
+        <option value="Thấp">🌱 Thấp</option>
+      </select>
+      <input type="datetime-local" id="endTime">
+      <button onclick="addTask()">Thêm công việc</button>
 
-  <!-- TASK -->
-  <section class="card">
-    <h2>📋 Quản lý công việc</h2>
+      <ul id="taskList"></ul>
 
-    <input type="text" id="task" placeholder="Nhập công việc">
-    <select id="priority">
-      <option value="Cao">🔥 Cao</option>
-      <option value="Trung bình">⚡ Trung bình</option>
-      <option value="Thấp">🌱 Thấp</option>
-    </select>
-    <input type="datetime-local" id="endTime">
-    <button onclick="addTask()">Thêm</button>
+      <p class="progress-text">Tiến độ hoàn thành:</p>
+      <div class="progress-container">
+        <div id="progressBar"></div>
+      </div>
+      <p id="progressText" class="progress-text">0% hoàn thành</p>
+    </section>
 
-    <ul id="taskList"></ul>
+    <section class="card">
+      <h2>🎯 Quản lý mục tiêu dài hạn</h2>
+      <input type="text" id="goalName" placeholder="Tên mục tiêu (VD: Học xong Python)">
+      <textarea id="goalDesc" placeholder="Mô tả mục tiêu" style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 10px; margin: 8px 0;"></textarea>
+      
+      <div style="display: flex; gap: 10px;">
+        <div style="flex: 1;">
+          <label>Bắt đầu:</label>
+          <input type="date" id="goalStart">
+        </div>
+        <div style="flex: 1;">
+          <label>Kết thúc:</label>
+          <input type="date" id="goalEnd">
+        </div>
+      </div>
+      <button onclick="addGoal()">Thêm mục tiêu</button>
+      <ul id="goalList"></ul>
+    </section>
+  </div>
 
-    <div class="progress-container">
-      <div id="progressBar"></div>
-    </div>
-    <p id="progressText">0% hoàn thành</p>
-  </section>
-
-  <!--THÊM QUẢN LÝ MỤC TIÊU DÀI HẠN-->
-  <section class="card">
-  <h2>🎯 Quản lý mục tiêu dài hạn</h2>
-
-  <input type="text" id="goalName" placeholder="Tên mục tiêu (VD: Học xong Python)">
-  <textarea id="goalDesc" placeholder="Mô tả mục tiêu (có thể để trống)"></textarea>
-
-  <label>Bắt đầu:</label>
-  <input type="date" id="goalStart">
-
-  <label>Kết thúc:</label>
-  <input type="date" id="goalEnd">
-
-  <button onclick="addGoal()">Thêm mục tiêu</button>
-
-  <ul id="goalList"></ul>
-</section>
-
-
-  <!-- POMODORO -->
-  <section class="card">
-    <h2>⏱ Pomodoro</h2>
-    <p id="timer">25:00</p>
-    <button onclick="startPomodoro()">Bắt đầu</button>
-  </section>
-
+  <aside>
+    <section class="card pomodoro-card">
+      <h2>⏱ Pomodoro</h2>
+      <p id="timer" class="time-display">25:00</p>
+      <button id="pomodoroBtn" onclick="startPomodoro()">Bắt đầu</button>
+      <button onclick="resetPomodoro()" style="background: #95a5a6; margin-top: 10px;">Đặt lại</button>
+    </section>
+  </aside>
 </main>
 
 <script src="js/auth.js"></script>
